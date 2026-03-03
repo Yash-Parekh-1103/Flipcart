@@ -8,12 +8,15 @@ import { NewProduct } from "@/db/schema"
 import { useCurrentUser } from "@/hooks/userHooks"
 // 🚀 Import server action for creating products
 import { NewProductAction } from "@/Actions/productAction"
+import { useRouter } from "next/navigation"
 
 // 🏪 Main product creation page component
 const page = () => {
 
     // 👤 Get current user's email
     const {email} = useCurrentUser()
+
+    const router = useRouter()
 
     // 📋 Initialize form with react-hook-form
     const {
@@ -29,8 +32,16 @@ const page = () => {
         // 📦 Add email to product data
         const newdata = {...data,email}
         // 🔄 Submit product to server
-        NewProductAction(newdata)
+       await  NewProductAction(newdata)
+
+       router.push("/product")
+
+        
     }
+
+
+
+
 
     return (
         <div>
