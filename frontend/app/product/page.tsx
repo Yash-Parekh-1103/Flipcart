@@ -59,10 +59,10 @@ const page = () => {
         <div className="flex">
 
             {allProduct && allProduct.map((p) =>
-                <a href={`/product/${p.id}`}>
+                <a key={p.id} href={`/product/${p.id}`}>
 
 
-                    <div key={p.name} className="border-2 border-black bg-gray-100 w-fit p-2 my-3 mx-3 flex flex-col items-center px-5">
+                    <div className="border-2 border-black bg-gray-100 w-fit p-2 my-3 mx-3 flex flex-col items-center px-5">
                         <img src={p.image}></img>
 
                         <p>{p.name}</p>

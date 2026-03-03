@@ -57,11 +57,13 @@ const page = () => {
     <p>{singleProduct?.name}</p>
     <p>${singleProduct?.price}</p>
     <p>{singleProduct?.description}</p>
-    <Button variant="outline" className="bg-black text-white">Add to cart</Button>
+    <a href={`/product/payment/${singleProduct?.id}`}>
+
+    <Button variant="outline" className="bg-black text-white">Buy Now</Button>
+
+    </a>
 
       </div>
-
-
 
     </div>
   )
