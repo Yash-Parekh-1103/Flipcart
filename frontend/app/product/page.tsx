@@ -1,37 +1,39 @@
 'use client'
 import { fetchallProduct } from "@/Actions/productAction"
 import { Button } from "@/components/ui/button"
+import { Product } from "@/db/schema"
 import { useEffect, useState } from "react"
 
 const page = () => {
 
-    const [allProduct, setallProduct] = useState<Product[]|null>(null)
+    const [allProduct, setallProduct] = useState<Product[] | null>(null)
 
     useEffect(() => {
-     
+
         //store product in useState
         // setallProduct()
         getallProduct()
 
     }, [])
 
-    const getallProduct =  async () => {
+    const getallProduct = async () => {
 
-      const product =   await fetchallProduct()
+        const product = await fetchallProduct()
 
-    //   console.log(product);
+        //   console.log(product);
 
-    setallProduct(product)
-
-    }
-    
-    interface Product {
-
-       price:number,
-       image:string,
-       name:string
+        setallProduct(product)
 
     }
+
+    // interface Product {
+
+    //    price:number,
+    //    image:string,
+    //    name:string,
+
+    // }
+
     // static value for now later come from backend
     // const product = [
     //     {
@@ -53,25 +55,26 @@ const page = () => {
 
     // ] as Product[]
 
+    return (
+        <div className="flex">
 
-  return (
-    <div className="flex">
+            {allProduct && allProduct.map((p) =>
+                <a href={`/product/${p.id}`}>
 
-        {allProduct && allProduct.map((p)=> 
 
- <div key={p.name} className="border-2 border-black bg-gray-100 w-fit p-2 my-3 mx-3 flex flex-col items-center px-5">
-        <img src={p.image}></img>
+                    <div key={p.name} className="border-2 border-black bg-gray-100 w-fit p-2 my-3 mx-3 flex flex-col items-center px-5">
+                        <img src={p.image}></img>
 
-    <p>{p.name}</p>
-    <p className="text-2xl font-bold">${p.price}</p>
-    <Button variant="outline" className="bg-black text-white w-full">Buy Now</Button>
+                        <p>{p.name}</p>
+                        <p className="text-2xl font-bold">${p.price}</p>
+                        <Button variant="outline" className="bg-black text-white w-full">Buy Now</Button>
 
-      </div>
+                    </div>
+                </a>
+            )}
 
-        )}
-     
-    </div>
-  )
+        </div>
+    )
 }
 
 export default page

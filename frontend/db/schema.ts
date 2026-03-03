@@ -7,7 +7,11 @@ export const ProductTable = pgTable("Product", {
   image:varchar().notNull(),
   name:varchar().notNull(),
   price:integer().notNull(),
+  description:varchar()
 
   
 });
+
+export type Product = typeof ProductTable.$inferSelect
+export type NewProduct = typeof ProductTable.$inferInsert
 
