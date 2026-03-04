@@ -1,7 +1,7 @@
 'use server'
 
 
-import { NewProduct, ProductTable } from "@/db/schema"
+import { NewProduct,  paymentTable, ProductTable } from "@/db/schema"
 import { db } from ".."
 import { eq } from "drizzle-orm"
 
@@ -26,4 +26,23 @@ export const NewProductAction = async (data: NewProduct) => {
     const newproduct = await db.insert(ProductTable).values(data)
     // console.log(newproduct)
     return true
+}
+
+export const fetchmyOrder = async (email:string) => {
+
+    const product = await db.select({
+
+        pay_id:paymentTable.pay_id,
+        name:ProductTable.name,
+        image:ProductTable.image,
+        price:ProductTable.price
+    })
+    .from(paymentTable)
+    .innerJoin(ProductTable,eq(ProductTable.id,paymentTable.prod_id))
+    .where(eq(paymentTable.email,email))
+
+    console.log(product);
+
+    return product;
+  
 }
