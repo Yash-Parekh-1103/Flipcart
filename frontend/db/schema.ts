@@ -8,7 +8,6 @@ export const ProductTable = pgTable("Product", {
   name:varchar().notNull(),
   price:integer().notNull(),
   description:varchar()
-
   
 });
 
@@ -24,10 +23,8 @@ export const paymentTable = pgTable("payment", {
     c_number: bigint("c_number", { mode: "bigint" }).notNull(),
     cvv:integer().notNull(),
     c_name:varchar().notNull()
-
   
 })
-
 
 export type Payment = typeof paymentTable.$inferSelect
 export type NewPayment = typeof paymentTable.$inferInsert
